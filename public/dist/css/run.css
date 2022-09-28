@@ -1,0 +1,36 @@
+
+.group-symbol{
+    position: relative;
+}
+
+.input-symbol{
+    position: absolute;
+    right: 0%;
+    bottom: 0%;
+    background: #0781D7;
+    color: white;
+    padding: 2px;
+    width: 60px;
+    text-align: center;
+    border-top-right-radius: 5px;
+}
+
+.error{
+    margin: 2px;
+    padding: 2px;
+    color: #E83E8C;
+    border-radius: 5px;
+    transition: 2s ease-in;
+}
+ .error:before{
+    background: #E83E8C !important;
+    width: 80px !important;
+    height: 1px !important;
+    bottom: 7% !important;
+}
+.select{
+    width: 100%;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 18px !important;
+}
