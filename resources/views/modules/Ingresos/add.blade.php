@@ -35,10 +35,10 @@
                   <select name="Clx_IdC"  class="form-control select" id="cbxCliente"> 
                     <option value="">seleciona</option>
                   </select>
-                  <input type="hidden" name="Clx_Id" id="Clx_Id">
+                  <input type="hidden" name="Clx_Id" id="Clx_Id" value="0">
                   <div class="info-box col-12  bg-info" id="showCliente" style="display: none;">
                       <span class="info-box-icon"><i class="far fa-user"></i></span>
-                      <input type="hidden" id="codCliente" name="Clx_Id">
+                    
                       <div class="info-box-content">
                         <h4 class="info-box-text" id="showClienteText" >cliente</h4> 
                       </div>
@@ -49,40 +49,74 @@
                   </div>
             </div>
 
+            <div class="row p-2" >
+              <div class="col-6">
+                <div class="form-check">
+                  <input value="N" class="form-check-input" id="Rno" type="radio" name="Rox_IsGastado">
+                  <label checked class="form-check-label" for="Rno">Rollo no gastado</label>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-check">
+                  <input value="Y" class="form-check-input" id="Rg" type="radio" name="Rox_IsGastado">
+                  <label class="form-check-label"  for="Rg">Rollo gastado</label> 
+                </div>
+              </div> 
+            </div>
+
+
+            <div id="IsGastado" style="display: none">
+              <div class="row">
+                <div class="col-sm-6">
+                  <!-- text input -->
+                  <div class="form-group mb-6 group-symbol">
+                    <label  >Codigo rollo </label>
+                    <select   class="form-control select" id="cod"> 
+                      <option value="">seleciona</option>
+                    </select>
+                
+                  </div>
+                </div> 
+              </div>
+            </div>
+
+
+
             <div id="medidas">
             <div class="row">
               <div class="col-sm-3">
                 <!-- text input -->
                 <div class="form-group mb-6 group-symbol">
                   <label for="Igx_Ancho">Ancho del Diseño </label>
-                  <input type="number" value="11" name="Igx_Ancho" class="form-control form-control-border" id="Igx_Ancho"  > 
+                  <input type="number" value="0" name="Igx_Ancho" class="form-control form-control-border" id="Igx_Ancho"  > 
                   <span class="input-symbol">metros</span> 
                 </div>
               </div>
               <div class="col-sm-3">
                   <div class="form-group mb-6 group-symbol">
                       <label for="Igx_Longitud">Alto del Diseño </label>
-                      <input type="number" value="44" name="Igx_Longitud" class="form-control form-control-border" id="Igx_Longitud"  > 
+                      <input type="number" value="0" name="Igx_Longitud" class="form-control form-control-border" id="Igx_Longitud"  > 
                       <span class="input-symbol">metros</span> 
                     </div>
               </div>
-              <div class="col-sm-3">
+              
+              <div class="col-sm-6">
                 <div class="form-group mb-6 group-symbol">
-                    <label for="Igx_LimiteA">Restante al imprimir ancho </label>
-                    <input type="number" value="0.3" name="Igx_LimiteA" class="form-control form-control-border" id="Igx_LimiteA"  > 
+                    <label for="Igx_LimiteL">Restante al imprimir largo</label>
+                    <input type="number" value="0" name="Igx_LimiteL" class="form-control form-control-border" id="Igx_LimiteL"  > 
                     <span class="input-symbol">metros</span> 
                 </div>
               </div>
               <div class="col-sm-3">
-                <div class="form-group mb-6 group-symbol">
-                    <label for="Igx_LimiteL">Restante al imprimir largo</label>
-                    <input type="number" value="0.3" name="Igx_LimiteL" class="form-control form-control-border" id="Igx_LimiteL"  > 
+                <div class="form-group mb-6 group-symbol" style="display: none;">
+                    <label for="Igx_LimiteA">Restante al imprimir ancho </label>
+                    <input type="number" value="0" name="Igx_LimiteA" class="form-control form-control-border" id="Igx_LimiteA"  > 
                     <span class="input-symbol">metros</span> 
                 </div>
               </div>
             </div> 
            
-            <div class="form-group">
+            <div class="form-group" style="display:none;">
                     <label >Tipo de material <code>*obligatorio</code></label>
                     <select name="Tmxs" id="Tmxs" class="custom-select form-control-border border-width-2"  >
                         <option value="">Seleciona</option> 
@@ -94,8 +128,8 @@
               
               <div class="col-12">
                   
-                 <div class="row">
-                  <div class="col-6"><button type="button" id="btnConsultarRollo" class="btn col-12 btn-info">Buscar un rollo adecuado <i class="fa fa-search"></i></button></div>
+                <div class="row justify-content-center">
+                  {{-- <div class="col-6"><button type="button" id="btnConsultarRollo" class="btn col-12 btn-info">Buscar un rollo adecuado <i class="fa fa-search"></i></button></div> --}}
                   <div class="col-6"><button type="button" id="btnRolloSearch" class="btn col-12 btn-info">Buscar un rollo por codigo <i class="fa fa-search"></i></button></div>
                  </div> 
 
@@ -111,7 +145,7 @@
                 </div>
               </div>
               <div class="col-sm-6"> 
-                <input type="hidden" id="Igx_Orientacion" name="Igx_Orientacion">
+                <input type="hidden" id="Igx_Orientacion" value="V" name="Igx_Orientacion">
                 <input type="hidden" id="Rox_Id" name="Rox_Id">
                 <div id="showDesignVertical" style="display: none;">
                  @include('modules.ingresos.showDesignVertical')
@@ -175,21 +209,31 @@
             
 
               <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-3">
                   <!-- text input -->
                   <div class="form-group mb-6 group-symbol">
                     <label >Monto Total <span id="deuda" class="badge badge-danger" style="display: none;">Se realizara una deuda a este cliente</span> </label>
                     <input type="number" id="MontoTotal" name="Igx_Monto" class="form-control form-control-border" >  
                   </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-3">
                     <div class="form-group mb-6 group-symbol">
                         <label for="Amortizacion">Amortizacion </label>
                         <input type="number" name="Amortizacion" class="form-control form-control-border" id="Amortizacion"  > 
                         
                       </div>
                 </div>
-                 
+                <div class="col-sm-6">
+                  <div class="form-group mb-6 ">
+                     <label >Metodo de pago </label>
+                     <select name="Mpx_Id" id="" class="form-control form-control-border">
+                      @foreach ($metodoPago as $mpxt)
+                        <option value="{{ $mpxt->Mpx_Id}}">{{ $mpxt->Mpx_Nombre}}  </option>
+                      @endforeach 
+                     </select>
+                      
+                    </div>
+              </div>
               </div> 
   
               
@@ -247,6 +291,18 @@
 @section("js")
     <script>
     
+    $("#Rg").change(function (e) {   
+      $("#medidas").fadeOut()
+      $("#IsGastado").fadeIn()
+    });
+
+    $("#Rno").change(function (e) {  
+      $("#medidas").fadeIn()
+      $("#IsGastado").fadeOut()
+    });
+
+
+
     $("#MontoTotal").keyup(function (e) {  
         $("#Amortizacion").val(e.target.value)
     });
@@ -265,8 +321,7 @@
        }
     });
 
-    $(function () { 
-
+    $(function () {  
         $( "#formIngreso" ).validate({
             rules: {
                 Clx_IdC: {
@@ -308,6 +363,7 @@
       console.log(e.target.value)
       $("#cbxCliente").val(e.target.value)
     });
+
     $("#cbxCliente").select2({
                 placeholder: 'Busca el cliente',
                 language: "es",
@@ -328,8 +384,36 @@
                         };
                     } 
                 } 
-   });
-          
+    });
+        
+    $("#cod").select2({
+                placeholder: 'Busca rollo gastado',
+                language: "es",
+                ajax: {
+                    type:"post",
+                    url:"{{ route('Rollo.cbx') }}",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (data) {
+                        return {
+                            searchTerm: data.term // search term
+                        };
+                    },
+                    processResults: function (response) {  
+                        console.log(response)
+                        return {
+                            results:response
+                        };
+                    } 
+                } 
+    });
+
+    
+    $("#cod").change(function (e) {  
+        $("#Rox_Id").val(e.target.value)
+        console.log("--"+e.target.value)
+    });
+
     </script>
     @stack('scripts')
     @stack('scriptConsultarRollo') 

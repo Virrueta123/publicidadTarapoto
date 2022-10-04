@@ -40,7 +40,7 @@
       <div class="col-sm-4 invoice-col">
         Ancho
         <address>
-          <strong>{{$show->Rox_Ancho}} centimetros </strong><br> 
+          <strong>{{ moneyFormat($show->Rox_Ancho) }} metros</strong><br> 
         </address>
       </div>
       
@@ -48,7 +48,7 @@
       <div class="col-sm-4 invoice-col">
         Longitud Inicial
         <address>
-          <strong>{{$show->Rox_Longitud}} metros</strong><br>
+          <strong>{{ moneyFormat($show->Rox_Longitud) }} metros</strong><br>
          
         </address>
       </div>
@@ -58,41 +58,88 @@
       <div class="col-sm-4 invoice-col">
         Longitud Usado
         <address>
-          <strong>0 mm usados</strong><br>
+          <strong>{{ moneyFormat($usado->descuentoRollo) }} metros usados</strong><br>
           
         </address>
       </div>
       <!-- /.col -->
        
     </div>
-    <!-- /.row -->
-    <h2 class="text-blue">Todo los ingresos del Rollo</h2>
-    <!-- Table row -->
-    <div class="row">
-      <div class="col-12 table-responsive">
-        <table class="table table-striped">
-          <thead>
-          <tr>
-            <th>Cliente</th>
-            <th>Descripcion</th>
-            <th>Longitud actual</th>
-            <th>Longitud gastado</th> 
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td>1</td>
-            <td>Call of Duty</td>
-            <td>455-981-221</td>
-            <td>El snort testosterone trophy driving gloves handsome</td> 
-          </tr> 
-          </tbody>
-        </table>
-      </div>
-      <!-- /.col -->
-    </div> 
- 
-  </div>
+     
   
+  <div class="row">
+    <div class="col-12">
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header bg-info">
+          <h3 class="card-title">Todo los ingresos del Rollo</h3>
+
+          <div class="card-tools">
+            {{-- <a href="{{ route("Cliente.create") }}" class="btn btn-tool bg-white text-info" title="Collapse">
+              <i class="fas fa-plus text-success"> </i> <span>Agregar </span> 
+            </a>  --}}
+          </div>
+        </div>
+        <div class="card-body p-1"> 
+              <table id="ingresoRollos" class="table table-bordered table-striped">
+                  <thead>
+                      <tr> 
+                          <th>Nombres</th> 
+                          <th>Fecha</th> 
+                          <th>Monto</th>
+                          <th>M-Pago</th> 
+                          <th><i class="fa fa-wrench"></i></th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+              </table>
+          
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer bg-info">
+          ----
+        </div>
+        <!-- /.card-footer-->
+      </div>
+      <!-- /.card -->
+    </div>
+  </div>
+
  
+@endsection
+
+@section("js")
+<script>
+  $(function () {
+
+    var table = $('#ingresoRollos').DataTable({
+      "order": [[ 1, "DESC" ]],
+      language: { 
+          "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json" 
+      }, 
+      ajax:{ 
+        "url":"{{ route("Rollo.igxs") }}",
+          "data": {
+            "Rox_Cod": "{{ $show->Rox_Cod }}",
+        }
+      },
+      columns: [
+          {data: 'Igx_Descripcion', name: 'Descripcion'},  
+          {data: 'Igx_Fecha', name: 'Fecha'},
+          {data: 'monto', name: 'Monto'},
+          {data: 'Mpx_Nombre', name: 'Monto'},
+          {
+              data: 'action', 
+              name: 'action' 
+          },
+      ],
+      dom: 'Bfrtip',
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }) 
+  });
+    
+</script>
+  
 @endsection

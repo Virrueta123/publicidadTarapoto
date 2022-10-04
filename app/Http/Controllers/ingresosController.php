@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\deudas;
 use App\Models\ingresos;
+use App\Models\metodo_pago;
 use App\Models\Rollo;
 use App\Models\TipoMaterial;
 use Illuminate\Http\Request;
@@ -17,6 +18,11 @@ class ingresosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         //
@@ -29,9 +35,9 @@ class ingresosController extends Controller
      */
     public function create()
     {      
-        
+        $metodoPago = metodo_pago::where("active","A")->get();
         $TipoMaterial = TipoMaterial::where("active","A")->get(); 
-        return View($this->ruta."add",["TipoMaterial"=>$TipoMaterial]);
+        return View($this->ruta."add",["TipoMaterial"=>$TipoMaterial,"metodoPago"=>$metodoPago]);
     }
     /**
      * Store a newly created resource in storage.
@@ -42,33 +48,60 @@ class ingresosController extends Controller
     public function store(Request $request)
     {
         $data = $request->all(); 
-       
+         
+        if( $data["Clx_Id"] == 0){
+            $clx_Id = $data["Clx_IdC"];
+        }else{
+            $clx_Id = $data["Clx_Id"];
+        }
+        
         $showRollo = Rollo::where("Rox_Cod",$data["Rox_Id"])->first();
         if($data["Igx_Orientacion"]=="V"){
-            $ingresos = ingresos::create([ 
-                "Rox_Id"=>$showRollo->Rox_Id,
-                "Igx_Descripcion"=>$data["Igx_Descripcion"],
-                "Clx_Id"=>$data["Clx_IdC"],
-                "Igx_Monto"=>$data["Igx_Monto"],
-                "Igx_LimiteD"=>$data["Igx_LimiteL"],
-                "Igx_LimiteC"=>$data["Igx_LimiteA"],
-                "Igx_Ancho"=>$data["Igx_Ancho"],
-                "Igx_Largo"=>$data["Igx_Longitud"],
-                "Igx_Orientacion"=>$data["Igx_Orientacion"],
-                "Igx_Fecha"=>fecha_hoy(), 
-            ]); 
+            if($data["Igx_Monto"] != $data["Amortizacion"]){
+                $ingresos = ingresos::create([ 
+                    "Rox_Id"=>$showRollo->Rox_Id,
+                    "Igx_Descripcion"=>$data["Igx_Descripcion"],
+                    "Clx_Id"=>$clx_Id,
+                    "Igx_Monto"=>$data["Amortizacion"],
+                    "Igx_LimiteD"=>$data["Igx_LimiteL"],
+                    "Igx_LimiteC"=>$data["Igx_LimiteA"],
+                    "Igx_Ancho"=>$data["Igx_Ancho"],
+                    "Igx_Largo"=>$data["Igx_Longitud"],
+                    "Igx_Orientacion"=>$data["Igx_Orientacion"],
+                    "Igx_Fecha"=>fecha_hoy(), 
+                    "Mpx_Id"=> $data["Mpx_Id"],
+                    "Rox_IsGastado"=>$data["Rox_IsGastado"],
+                ]); 
+            }else{
+                $ingresos = ingresos::create([ 
+                    "Rox_Id"=>$showRollo->Rox_Id,
+                    "Igx_Descripcion"=>$data["Igx_Descripcion"],
+                    "Clx_Id"=>$clx_Id,
+                    "Igx_Monto"=>$data["Igx_Monto"],
+                    "Igx_LimiteD"=>$data["Igx_LimiteL"],
+                    "Igx_LimiteC"=>$data["Igx_LimiteA"],
+                    "Igx_Ancho"=>$data["Igx_Ancho"],
+                    "Igx_Largo"=>$data["Igx_Longitud"],
+                    "Igx_Orientacion"=>$data["Igx_Orientacion"],
+                    "Igx_Fecha"=>fecha_hoy(),
+                    "Mpx_Id"=> $data["Mpx_Id"],
+                    "Rox_IsGastado"=>$data["Rox_IsGastado"],
+                ]); 
+            }
         }else{
             $ingresos = ingresos::create([ 
                 "Rox_Id"=>$showRollo->Rox_Id,
                 "Igx_Descripcion"=>$data["Igx_Descripcion"],
-                "Clx_Id"=>$data["Clx_IdC"],
+                "Clx_Id"=>$clx_Id,
                 "Igx_Monto"=>$data["Igx_Monto"],
                 "Igx_LimiteD"=>$data["Igx_LimiteA"],
                 "Igx_LimiteC"=>$data["Igx_LimiteL"],
                 "Igx_Ancho"=>$data["Igx_Longitud"],
                 "Igx_Largo"=>$data["Igx_Ancho"],
                 "Igx_Orientacion"=>$data["Igx_Orientacion"],
-                "Igx_Fecha"=>fecha_hoy(), 
+                "Igx_Fecha"=>fecha_hoy(),
+                "Mpx_Id"=> $data["Mpx_Id"],
+                "Rox_IsGastado"=>$data["Rox_IsGastado"],
             ]);  
         } 
           

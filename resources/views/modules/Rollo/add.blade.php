@@ -63,18 +63,21 @@
                 <div class="col-sm-6">
                   <!-- text input -->
                   <div class="form-group mb-6 ">
-                    <label for="Rox_Monto">Costo del rollo <code>*obligatorio</code> <code class="text-info">Medida en cm</code></label>
-                    <input type="number" name="Rox_Monto" class="form-control form-control-border" id="Rox_Monto"  > 
+                    <label for="Rox_Monto">Rollo Gastado? <code>*obligatorio</code> </label>
                      
+                    <select name="Rox_IsGastado" class="form-control form-control-border">
+                        <option value="N">Rollo no gastado</option>
+                        <option value="Y">Rollo gastado </option>
+                    </select>
                   </div>
                 </div>
-                <div class="col-sm-6">
+                {{-- <div class="col-sm-6">
                     <div class="form-group mb-6 group-symbol">
                         <label for="Rox_Precio">Costo por mm <code>*obligatorio</code> </label>
                         <input type="number" name="Rox_Precio" class="form-control form-control-border" id="Rox_Precio"  > 
                         <span class="input-symbol">mm</span> 
                       </div>
-                </div>
+                </div> --}}
               </div>
               <p>EL codigo del rollo cuando este creado sera <strong>{{ $codRollo }}</strong> </p>
             </div>

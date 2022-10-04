@@ -7,7 +7,7 @@
     
     @foreach ($deudas as $dexn)
    
-      <a href="#" class="dropdown-item">
+      <a href="{{ route("Deudas.show",$dexn->Dex_Id) }}" class="dropdown-item">
         <!-- Message Start -->
         <div class="media"> 
           <i class="far fa-calendar fa-2x p-1 text-primary"></i>
@@ -15,9 +15,9 @@
             @if ($dexn->Clx_RazonSocial != "" )
               <h3 class="dropdown-item-title"> {{ limite_texto($dexn->Clx_RazonSocial,20) }} </h3>
             @else
-              <h3 class="dropdown-item-title"> {{ limite_texto($dexn->Clx_Nombre." | ".$dexn->Clx_Apellido) }}</h3>  
+              <h3 class="dropdown-item-title"> {{ limite_texto($dexn->Clx_Nombre." | ".$dexn->Clx_Apellido,20) }}</h3>  
             @endif 
-            <p class="text-sm">deuda de {{ $dexn->Dex_Deuda }} soles</p>
+            <p class="text-sm">deuda de S/ {{ moneyformat($dexn->Dex_Deuda) }} soles</p>
             <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> Hoy dia</p>
           </div>
         </div>

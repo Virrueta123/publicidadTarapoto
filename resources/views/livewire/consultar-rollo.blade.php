@@ -235,21 +235,19 @@
           ) 
         }else{
       const { value: formValues } = await Swal.fire({
-        title: 'Multiple inputs',
+        title: 'Digita el codigo del rollo',
         html:
-          '<input id="swal-input1" class="swal2-input">' +
-          ' <select id="orientacion" class="swal2-input"> <option value="">selecione una orientacion</option> <option value="0">Vertical</option> <option value="1">Horizontal</option> </select>',
+          '<input id="swal-input1" class="swal2-input text-center">' ,
         focusConfirm: false,
          
         preConfirm: () => {
 
-          if (document.getElementById('swal-input1').value == '' || document.getElementById('orientacion').value== '' ) {
+          if (document.getElementById('swal-input1').value == '') {
              swal.showValidationMessage("llene los datos correctamente"); // Show error when validation fails.
              
           } else {
             return {
-              "cod":document.getElementById('swal-input1').value,
-              "orientacion":document.getElementById('orientacion').value
+              "cod":document.getElementById('swal-input1').value
             }
           }
           
@@ -258,7 +256,7 @@
 
       if (formValues) { 
         console.log(formValues) 
-        @this.getRox(formValues.cod,ancho.val(),alto.val(),limiteA.val(),limiteL.val(),formValues.orientacion)
+        @this.getRox(formValues.cod,ancho.val(),alto.val(),limiteA.val(),limiteL.val(),0)
         .then((result) => {
           console.log(result)
            if(!result){

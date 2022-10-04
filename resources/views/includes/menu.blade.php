@@ -11,8 +11,8 @@
               </p>
             </a>
       </li>      
-      <li class="nav-item menu-open">
-        <a href="#" class="nav-link active">
+      <li class="nav-item  ">
+        <a href="#" class="nav-link ">
           <i class="nav-icon fas fa-paint-roller"></i>
           <p>
             Gigantografias
@@ -20,12 +20,7 @@
           </p>
         </a>
         <ul class="nav nav-treeview">
-          <li class="nav-item">
-            <a href="./index.html" class="nav-link active">
-              <i class="fas fa-project-diagram nav-icon"></i>
-              <p>Lotes</p>
-            </a>
-          </li>
+           
           <li class="nav-item">
             <a href="{{ route("Material.index") }}" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
@@ -38,12 +33,7 @@
               <p>Tipo Material</p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="./index3.html" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Control de materiales</p>
-            </a>
-          </li>
+           
         </ul>
       </li>
       {{-- <li class="nav-item">
@@ -66,29 +56,12 @@
         </a>
         <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="pages/charts/chartjs.html" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>ChartJS</p>
+            <a href="{{ route("Reporte.between") }}" class="nav-link">
+              <i class="far fa-calendar-alt nav-icon"></i>
+              <p>entres fechas</p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="pages/charts/flot.html" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Flot</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="pages/charts/inline.html" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Inline</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="pages/charts/uplot.html" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>uPlot</p>
-            </a>
-          </li>
+           
         </ul>
       </li>
 
@@ -108,24 +81,14 @@
               <p>Crear</p>
             </a>
           </li>
+         
           <li class="nav-item">
-            <a href="pages/charts/flot.html" class="nav-link">
+            <a href="{{ route("MetodoPago.index") }}" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
-              <p>ingresos del mes</p>
+              <p>Metodo de pago</p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="pages/charts/inline.html" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Inline</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="pages/charts/uplot.html" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>uPlot</p>
-            </a>
-          </li>
+          
         </ul>
       </li>
 

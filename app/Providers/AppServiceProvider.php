@@ -31,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
         Carbon::setUTF8(true);
         Carbon::setLocale(config('app.locale'));
         setlocale(LC_ALL, 'es_Pe', 'es', 'PE', 'es_PE.utf8');
-
+        
         view()->composer('*', function($view)
         {
             if (Auth::check()) {
@@ -52,7 +52,7 @@ class AppServiceProvider extends ServiceProvider
                 $deudas = deudas::select("*")
                 ->join('ingresos', 'ingresos.Igx_Id', '=', 'deudas.Igx_Id')
                 ->leftjoin('cliente', 'cliente.Clx_Id', '=', 'ingresos.Clx_Id')
-                ->where("deudas.active","A")
+                ->where("deudas.active","A") 
                 ->get();
                  
                 view()->share(["pendientes"=>$pendientes,"pendientesDay"=>$pendientesDay,"notificacionPendientesCount"=>$notificacionPendientesCount,"deudas"=>$deudas]);

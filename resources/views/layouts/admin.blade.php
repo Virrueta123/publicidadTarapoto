@@ -3,8 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Dashboard</title>
+  <title>Publicidad | Tarapoto</title>
   <meta name="csrf-token" content="{{ csrf_token() }}">
+  <link rel="icon" href="{{ asset("dist/img/logo/simbolo.svg") }}" type="image/png" sizes="16x16">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -47,8 +48,8 @@
 
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <h2>publicidad tarapoto</h2>
-    {{-- <img class="animation__shake" src="{{ asset("dist/img/AdminLTELogo.png") }}" alt="AdminLTELogo" height="60" width="60"> --}}
+     
+     <img class="animation__shake" src="{{ asset("dist/img/logo/completo.svg") }}" alt="publicidad Tarapoto" height="500" width="500">  
   </div>
 
   <!-- Navbar -->
@@ -59,7 +60,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Inicio</a>
+        <a href="{{ route("home") }}" class="nav-link">Inicio</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">calendario</a>
@@ -108,13 +109,13 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      {{-- <img src="{{ asset("dist/img/AdminLTELogo.png") }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> --}}
-      <span class="brand-text font-weight-light">Publicidad tarapoto</span>
+    <a href="{{ route("home") }}" class="brand-link bg-white">
+      <img src="{{ asset("dist/img/logo/simbolo.svg") }}" alt="AdminLTE Logo" class="brand-image  " style="opacity: 1;">
+      <span class="brand-text font-weight-light"><img src="{{ asset("dist/img/logo/logo.svg") }}" alt="AdminLTE Logo" style="width: 110px;"  ></span>
     </a>
 
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar bg-dark">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
@@ -134,7 +135,7 @@
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper" >
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">

@@ -12,7 +12,7 @@
             <h3 class="card-title">Clientes</h3>
 
             <div class="card-tools">
-              <a href="{{ route("Material.create") }}" class="btn btn-tool bg-white text-info" title="Collapse">
+              <a href="{{ route("Cliente.create") }}" class="btn btn-tool bg-white text-info" title="Collapse">
                 <i class="fas fa-plus text-success"> </i> <span>Agregar </span> 
               </a> 
             </div>

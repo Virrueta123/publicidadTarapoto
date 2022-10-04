@@ -8,7 +8,7 @@
 <div class="card card-primary card-outline">
     <div class="card-body box-profile">
       <div class="text-center">
-        <img class="profile-user-img img-fluid img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
+        <i class="fa fa-user text-info fa-4x img-circle" ></i>
       </div>
       @if ($Clx->Clx_RazonSocial!="")
         <h3 class="profile-username text-center text-info">{{ $Clx->Clx_RazonSocial }}</h3>
@@ -51,8 +51,8 @@
                 </li>
                   <li class="list-group-item">
                   <b>Direccion</b>
-                  @if ($Clx->Clx_Direccion !="")
-                    <p class="float-right text-success">{{ $Clx->Clx_Direccion }}</p>
+                  @if ($Clx->Clx_Direc !="")
+                    <p class="float-right text-success">{{ $Clx->Clx_Direc }}</p>
                   @else
                     <p class="float-right text-danger">No se registro</p>
                   @endif
@@ -60,19 +60,84 @@
                 </li>
               </ul>
           </div>
-      </div>
-      
-
-      <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+      </div> 
     </div>
     <!-- /.card-body -->
   </div>
  
+  <div class="row">
+    <div class="col-12">
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header bg-info">
+          <h3 class="card-title">Todos los trabajos de este cliente</h3>
+
+          <div class="card-tools">
+            {{-- <a href="{{ route("Cliente.create") }}" class="btn btn-tool bg-white text-info" title="Collapse">
+              <i class="fas fa-plus text-success"> </i> <span>Agregar </span> 
+            </a>  --}}
+          </div>
+        </div>
+        <div class="card-body"> 
+              <table id="ingresoCliente" class="table table-bordered table-striped">
+                  <thead>
+                      <tr> 
+                          <th>Nombres</th> 
+                          <th>Fecha</th> 
+                          <th>Monto</th>
+                          <th>M-Pago</th> 
+                          <th><i class="fa fa-wrench"></i></th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+              </table>
+          
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer bg-info">
+          ----
+        </div>
+        <!-- /.card-footer-->
+      </div>
+      <!-- /.card -->
+    </div>
+  </div>
 
 @endsection
  
 
 @section("js")
+<script>
+  $(function () {
+
+    var table = $('#ingresoCliente').DataTable({
+      "order": [[ 1, "DESC" ]],
+      language: { 
+          "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json" 
+      }, 
+      ajax:{ 
+        "url":"{{ route("Cliente.igxs") }}",
+          "data": {
+            "Clx_Id": "{{ $Clx->Clx_Id }}",
+        }
+      },
+      columns: [
+          {data: 'Igx_Descripcion', name: 'Descripcion'},  
+          {data: 'Igx_Fecha', name: 'Fecha'},
+          {data: 'monto', name: 'Monto'},
+          {data: 'Mpx_Nombre', name: 'Monto'},
+          {
+              data: 'action', 
+              name: 'action' 
+          },
+      ],
+      dom: 'Bfrtip',
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }) 
+  });
     
+</script>
   
 @endsection
