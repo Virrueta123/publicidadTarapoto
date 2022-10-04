@@ -103,10 +103,10 @@ class MetodoPagoController extends Controller
         $Mpx = $Mpx->update( $valid );
         if( $Mpx){  
             session()->flash('successo', 'Un metodo de pago se actualizo correctamente');
-            return redirect()->route("TipoEgresos.index");
+            return redirect()->route("MetodoPago.index");
         }else{
             session()->flash('erroro', 'fallo el registro, intentelo de nuevo');
-            return redirect()->route("TipoEgresos.index");
+            return redirect()->route("MetodoPago.index");
         } 
     }
 
@@ -137,7 +137,7 @@ class MetodoPagoController extends Controller
                 ->addColumn('action', function($data){
                     $msm = 'estas segur@ que desea elminar este metodo de pago';
                     $actionBtn = '
-                    <a href="'.route("TipoEgresos.edit",$data->Mpx_Id).'" class="edit btn btn-success btn-xs"><i class="fas fa-edit"> </i></a>
+                    <a href="'.route("MetodoPago.edit",$data->Mpx_Id).'" class="edit btn btn-success btn-xs"><i class="fas fa-edit"> </i></a>
                     <a  class="edit btn  btn-xs">
                     <form method="POST"  id="formdeleteMetodoPago'.$data->Mpx_Id.'" action="'.route("MetodoPago.delete",$data->Mpx_Id).'">
                             <input type="hidden" name="_token" value="'. csrf_token() .'">

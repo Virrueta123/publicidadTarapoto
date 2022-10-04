@@ -12,7 +12,7 @@
         <!-- Default box -->
         <div class="card">
           <div class="card-header bg-info">
-            <h3 class="card-title">Tabla de Tipo de egresos</h3>
+            <h3 class="card-title">pedientes</h3>
 
             <div class="card-tools">
               <a href="{{ route("Pendientes.create") }}" class="btn btn-tool bg-white text-info" title="Collapse">

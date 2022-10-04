@@ -52,8 +52,8 @@
             <div class="row p-2" >
               <div class="col-6">
                 <div class="form-check">
-                  <input value="N" class="form-check-input" id="Rno" type="radio" name="Rox_IsGastado">
-                  <label checked class="form-check-label" for="Rno">Rollo no gastado</label>
+                  <input checked  value="N" class="form-check-input" id="Rno" type="radio" name="Rox_IsGastado">
+                  <label class="form-check-label" for="Rno">Rollo no gastado</label>
                 </div>
               </div>
               <div class="col-6">
@@ -291,12 +291,17 @@
 @section("js")
     <script>
     
-    $("#Rg").change(function (e) {   
+    $("#Rg").change(function (e) { 
+      $("#Igx_Ancho").val(0); 
+      $("#Igx_Longitud").val(0);
+      $("#Igx_LimiteA").val(0);
+      $("#Igx_LimiteL").val(0);   
       $("#medidas").fadeOut()
       $("#IsGastado").fadeIn()
     });
 
-    $("#Rno").change(function (e) {  
+    $("#Rno").change(function (e) { 
+     
       $("#medidas").fadeIn()
       $("#IsGastado").fadeOut()
     });

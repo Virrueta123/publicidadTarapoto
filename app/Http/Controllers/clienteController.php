@@ -185,14 +185,7 @@ class clienteController extends Controller
             ->addColumn('action', function($Data){
                 $msm = "estas segur@ que desea elminar este cliente";
                 $actionBtn = '
-                <a href="'.route("Cliente.show",$Data->Igx_Id).'" class="edit btn btn-warning btn-sm"><i class="fa fa-eye"></i></a>
-                <a href="'.route("Cliente.edit",$Data->Igx_Id).'" class="edit btn btn-success btn-sm"><i class="fas fa-edit"> </i></a> 
-                <a  class="edit btn  btn-xs">
-                <form method="POST"  id="formdeletecliente'.$Data->Igx_Id.'" action="'.route("Cliente.delete",$Data->Igx_Id).'">
-                        <input type="hidden" name="_token" value="'. csrf_token() .'">
-                        <input name="_method" type="hidden" value="DELETE">
-                        <button type="submit"  onclick="FormDelete(\'cliente'.$Data->Igx_Id.'\',\''.$msm.'\',event)" class="btn btn-danger btn-xs" data-toggle="tooltip" title="Delete"><i class="fas fa-trash"> </i></button>
-                 </form></a>
+                
                 ';
                 return $actionBtn;
             }) 

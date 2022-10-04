@@ -201,7 +201,7 @@
                             </div>
                           </td>
                           <td  class="text-center" style="vertical-align : middle;text-align:center;">
-                            <a href="#" class="btn btn-warning btn-xs"> <i class="fa fa-eye"></i> ver fecha</a>
+                            <a href="{{ route("Reporte.ShowFecha",$rp["fecha"]) }}" class="btn btn-warning btn-xs"> <i class="fa fa-eye"></i> ver fecha</a>
                           </td>
                         </tr> 
                       @empty

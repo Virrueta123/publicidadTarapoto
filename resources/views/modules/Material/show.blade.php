@@ -84,9 +84,11 @@
                   @if ($rx->ds > 0)
                     <a href="{{ route("Rollo.show",$rx->cod) }}" class="edit btn btn-warning btn-sm"><i class="far fa-eye"> </i></a>
                   @else
+                  {{-- 
                     <a href="{{ route("Rollo.show",$rx->cod) }}" class="edit btn btn-warning btn-sm"><i class="far fa-eye"> </i></a>
+                    
                     <a href="javascript:void(0)" class="edit btn btn-success btn-sm"><i class="fas fa-edit"> </i></a> 
-                    <a href="javascript:void(0)" class="delete btn btn-danger btn-sm"><i class="fas fa-trash"> </i></a>
+                    <a href="javascript:void(0)" class="delete btn btn-danger btn-sm"><i class="fas fa-trash"> </i></a>--}}
                   @endif 
                 </td> 
               </tr> 

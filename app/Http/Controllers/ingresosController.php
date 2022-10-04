@@ -70,7 +70,7 @@ class ingresosController extends Controller
                     "Igx_Orientacion"=>$data["Igx_Orientacion"],
                     "Igx_Fecha"=>fecha_hoy(), 
                     "Mpx_Id"=> $data["Mpx_Id"],
-                    "Rox_IsGastado"=>$data["Rox_IsGastado"],
+                    "Igx_IsGastar"=>$data["Rox_IsGastado"],
                 ]); 
             }else{
                 $ingresos = ingresos::create([ 
@@ -85,7 +85,7 @@ class ingresosController extends Controller
                     "Igx_Orientacion"=>$data["Igx_Orientacion"],
                     "Igx_Fecha"=>fecha_hoy(),
                     "Mpx_Id"=> $data["Mpx_Id"],
-                    "Rox_IsGastado"=>$data["Rox_IsGastado"],
+                    "Igx_IsGastar"=>$data["Rox_IsGastado"],
                 ]); 
             }
         }else{
@@ -101,7 +101,7 @@ class ingresosController extends Controller
                 "Igx_Orientacion"=>$data["Igx_Orientacion"],
                 "Igx_Fecha"=>fecha_hoy(),
                 "Mpx_Id"=> $data["Mpx_Id"],
-                "Rox_IsGastado"=>$data["Rox_IsGastado"],
+                "Igx_IsGastar"=>$data["Rox_IsGastado"],
             ]);  
         } 
           
