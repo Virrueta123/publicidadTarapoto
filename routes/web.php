@@ -23,6 +23,12 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/tipomaterial', [App\Http\Controllers\TipoMaterialController::class, 'index'])->name('TipoMaterial.index');
 Route::get('/tipomaterialdata', [App\Http\Controllers\TipoMaterialController::class, 'data'])->name('TipoMaterial.data'); 
+Route::get('/tipoematerial/crear', [App\Http\Controllers\TipoMaterialController::class, 'create'])->name('TipoMaterial.create'); 
+Route::get('/tipoematerial/{id}/editar', [App\Http\Controllers\TipoMaterialController::class, 'edit'])->name('TipoMaterial.edit');
+Route::patch('/tipoematerial/{id}', [App\Http\Controllers\TipoMaterialController::class, 'update'])->name('TipoMaterial.update');
+Route::delete('/tipoematerial/{id}', [App\Http\Controllers\TipoMaterialController::class, 'destroy'])->name('TipoMaterial.delete');   
+Route::post('/tipoematerial', [App\Http\Controllers\TipoMaterialController::class, 'store'])->name('TipoMaterial.store'); 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes  Material
@@ -33,6 +39,9 @@ Route::get('/material/crear', [App\Http\Controllers\MaterialController::class, '
 Route::post('/material', [App\Http\Controllers\MaterialController::class, 'store'])->name('Material.store');
 Route::get('/materialdata', [App\Http\Controllers\MaterialController::class, 'data'])->name('Material.data');
 Route::get('/material/{cod}', [App\Http\Controllers\MaterialController::class, 'show'])->name('Material.show');
+Route::get('/material/{id}/editar', [App\Http\Controllers\MaterialController::class, 'edit'])->name('Material.edit');
+Route::patch('/material/{id}', [App\Http\Controllers\MaterialController::class, 'update'])->name('Material.update');
+Route::delete('/material/{id}', [App\Http\Controllers\MaterialController::class, 'destroy'])->name('Material.delete');  
 /*
 |--------------------------------------------------------------------------
 | Web Routes Rollo
@@ -44,6 +53,7 @@ Route::get('/rollo/{cod}', [App\Http\Controllers\RolloController::class, 'show']
 Route::get('/rollo/{cod}/crearmaterial', [App\Http\Controllers\RolloController::class, 'create'])->name('Rollo.create');
 Route::get('/rollosigx', [App\Http\Controllers\RolloController::class, 'Igxs'])->name('Rollo.igxs'); 
 Route::post('/rollocbx', [App\Http\Controllers\RolloController::class, 'cbx'])->name('Rollo.cbx');
+Route::delete('/rollo/{id}', [App\Http\Controllers\RolloController::class, 'destroy'])->name('Rollo.delete');  
 /*
 |--------------------------------------------------------------------------
 | Web Routes Cliente
@@ -78,8 +88,9 @@ Route::delete('/deuda/{id}', [App\Http\Controllers\DeudasController::class, 'des
 */   
 Route::get('/ingresos/crear', [App\Http\Controllers\ingresosController::class, 'create'])->name('Ingresos.create'); 
 Route::post('/ingresos', [App\Http\Controllers\ingresosController::class, 'store'])->name('Ingresos.store'); 
-// Route::get('/ingresos/{cod}', [App\Http\Controllers\RolloController::class, 'show'])->name('Rollo.show');
-// Route::get('/ingresos/{cod}/crearmaterial', [App\Http\Controllers\RolloController::class, 'create'])->name('Rollo.create'); 
+Route::get('/ingresos/{id}/editar', [App\Http\Controllers\ingresosController::class, 'edit'])->name('Ingresos.edit');
+Route::patch('/ingresos/{id}', [App\Http\Controllers\ingresosController::class, 'update'])->name('Ingresos.update');
+Route::delete('/ingresos/{id}', [App\Http\Controllers\ingresosController::class, 'destroy'])->name('Ingresos.delete');    
 /*
 
 /*
@@ -109,6 +120,7 @@ Route::get('/tipoegresos/{id}/editar', [App\Http\Controllers\tipoEgresosControll
 Route::patch('/tipoegresos/{id}', [App\Http\Controllers\tipoEgresosController::class, 'update'])->name('TipoEgresos.update');
 Route::delete('/tipoegresos/{id}', [App\Http\Controllers\tipoEgresosController::class, 'destroy'])->name('TipoEgresos.delete');   
 Route::post('/tipoegresos', [App\Http\Controllers\tipoEgresosController::class, 'store'])->name('TipoEgresos.store'); 
+
 /*
 
 /*

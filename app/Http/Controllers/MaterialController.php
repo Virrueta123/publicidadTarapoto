@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Material;
+use App\Models\Rollo;
 use App\Models\TipoMaterial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -71,11 +72,12 @@ class MaterialController extends Controller
     public function show($id)
     { 
         $show = Material::select("*")
-        ->join('tipo_material', 'tipo_material.Tmx_Id', '=', 'materiales.Tmx_Id')
+        ->join('tipo_material', 'tipo_material.Tmx_Id', '=', 'materiales.Tmx_Id') 
         ->where("materiales.Mx_Id",$id)
         ->where("materiales.active","A")->first(); 
         if($show){ 
             $rollos = DB::select('CALL bd_publitara.showRollos(?) ', [$show->Mx_Id]);
+           
             return View("modules.Material.show",["cod"=>$id,"show"=>$show,"rollos"=>$rollos]); 
         }else{
             return View("layouts.error404",[
@@ -93,10 +95,44 @@ class MaterialController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function edit( $id)
     {
-        //
+        $Tmxs = TipoMaterial::where("active","A")->get(); 
+        $Mx = Material::select("*") 
+        ->join("tipo_material","tipo_material.Tmx_Id","=","materiales.Tmx_Id") 
+        ->where("Mx_Id",$id)->where("materiales.active","A")
+        ->first();
+        if($Mx){ 
+            return View("modules.Material.edit",["Mx"=>$Mx,"Tmxs"=>$Tmxs ]); 
+        }else{
+            return View("layouts.error404",[
+                     "title"=>"este material no se encontro",
+                     "desc"=>"intente de nuevo"
+                   ]); 
+        }
     }
+
+    public function update(Request $request, $id)
+        {
+            $valid = $request->validate([
+                "Mx_Ancho"=>"required",
+                "Mx_Longitud"=>"required",
+                "Mx_Nombre"=>"required|max:149",
+                "Tmxs"=>"required",
+            ]);
+            $Tmxs = Arr::pull($valid, 'Tmxs');
+            $Tmxs = Arr::add($valid, 'Tmx_Id', $Tmxs); 
+            $create = Material::where("Mx_Id",$id)->where("active","A")
+            ->first()->update($Tmxs);
+             
+            if( $create ){ 
+                session()->flash('successo', 'Registro se edito correctamente');
+                return redirect()->route("Material.index");
+            }else{
+                session()->flash('erroro', 'fallo el registro, intentelo de nuevo');
+                return redirect()->route("Material.index");
+            }
+        }
 
     /**
      * Remove the specified resource from storage.
@@ -106,7 +142,15 @@ class MaterialController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $Mx = Material::where("Mx_Id",$id)->where("active","A")->first();
+        $Mx = $Mx->update( ["active"=>"D"] );
+        if( $Mx){  
+            session()->flash('successo', 'Un material se elimino');
+            return redirect()->route("Material.index");
+        }else{
+            session()->flash('erroro', 'fallo el registro, intentelo de nuevo');
+            return redirect()->route("Material.index");
+        } 
     }
 
     public function data(Request $request){
@@ -115,10 +159,16 @@ class MaterialController extends Controller
              return DataTables::of($model)
                  ->addIndexColumn()
                  ->addColumn('action', function($row){
+                    $msm = 'estas segur@ que desea elminar este material';
                      $actionBtn = '
                      <a href="'.route("Material.show",$row->Mx_Id).'" class="edit btn btn-success btn-sm"><i class="far fa-eye"> </i></a>
-                     <a href="javascript:void(0)" class="edit btn btn-success btn-sm"><i class="fas fa-edit"> </i></a> 
-                     <a href="javascript:void(0)" class="delete btn btn-danger btn-sm"><i class="fas fa-trash"> </i></a>
+                     <a href="'.route("Material.edit",$row->Mx_Id).'" class="edit btn btn-success btn-sm"><i class="fas fa-edit"> </i></a> 
+                     <a  class="edit btn  btn-xs">
+                    <form method="POST"  id="formdeletematerial'.$row->Mx_Id.'" action="'.route("Material.delete",$row->Mx_Id).'">
+                            <input type="hidden" name="_token" value="'. csrf_token() .'">
+                            <input name="_method" type="hidden" value="DELETE">
+                            <button type="submit"  onclick="FormDelete(\'material'.$row->Mx_Id.'\',\''.$msm.'\',event)" class="btn btn-danger btn-xs" data-toggle="tooltip" title="Delete"><i class="fas fa-trash"> </i></button>
+                     </form></a>
                      ';
                      return $actionBtn;
                  }) 

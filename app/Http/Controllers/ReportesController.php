@@ -129,29 +129,43 @@ class ReportesController extends Controller
         foreach ($days as $day) { 
             $isReport = 0;
 
-            $IgxTotal = ingresos::select(DB::raw('coalesce(SUM(ingresos.Igx_Monto),0) as total'))->where("Igx_Fecha",date('Y-m-d', strtotime($day)))->first();
+            $IgxTotal = ingresos::select(DB::raw('coalesce(SUM(ingresos.Igx_Monto),0) as total'))
+            ->where("Igx_Fecha",date('Y-m-d', strtotime($day)))
+            ->where("actives","A")
+            ->first();
             
             $IgxTarjeta = ingresos::select(DB::raw('coalesce(SUM(Igx_Monto),0) as total'))
             ->join("metodo_pago","metodo_pago.Mpx_Id","=","ingresos.Mpx_Id")
             ->where("metodo_pago.Mpx_IsEfectivo","N")
-            ->where("ingresos.Igx_Fecha",date('Y-m-d', strtotime($day)))->first();
+            ->where("ingresos.Igx_Fecha",date('Y-m-d', strtotime($day)))
+            ->where("ingresos.actives","A")
+            ->first();
            
             $IgxEfectivo = ingresos::select(DB::raw('coalesce(SUM(Igx_Monto),0) as total'))
             ->join("metodo_pago","metodo_pago.Mpx_Id","=","ingresos.Mpx_Id")
             ->where("metodo_pago.Mpx_IsEfectivo","Y")
-            ->where("ingresos.Igx_Fecha",date('Y-m-d', strtotime($day)))->first();
+            ->where("ingresos.Igx_Fecha",date('Y-m-d', strtotime($day)))
+            ->where("ingresos.actives","A")
+            ->first();
 
-            $EgxTotal = egresos::select(DB::raw('coalesce(SUM(Egx_Monto),0) as total'))->where("Egx_Fecha",date('Y-m-d', strtotime($day)))->first();
+            $EgxTotal = egresos::select(DB::raw('coalesce(SUM(Egx_Monto),0) as total'))
+            ->where("Egx_Fecha",date('Y-m-d', strtotime($day)))
+            ->where("active","A")
+            ->first();
             
             $EgxTarjeta = egresos::select(DB::raw('coalesce(SUM(Egx_Monto),0) as total'))
             ->join("metodo_pago","metodo_pago.Mpx_Id","=","egresos.Mpx_Id")
             ->where("metodo_pago.Mpx_IsEfectivo","N")
-            ->where("egresos.Egx_Fecha",date('Y-m-d', strtotime($day)))->first();
+            ->where("egresos.Egx_Fecha",date('Y-m-d', strtotime($day)))
+            ->where("egresos.active","A")
+            ->first();
            
             $EgxEfectivo = egresos::select(DB::raw('coalesce(SUM(Egx_Monto),0) as total'))
             ->join("metodo_pago","metodo_pago.Mpx_Id","=","egresos.Mpx_Id")
             ->where("metodo_pago.Mpx_IsEfectivo","Y")
-            ->where("egresos.Egx_Fecha",date('Y-m-d', strtotime($day)))->first();
+            ->where("egresos.Egx_Fecha",date('Y-m-d', strtotime($day)))
+            ->where("egresos.active","A")
+            ->first();
             
             if($EgxTotal->total!=0){
                 $isReport++;
@@ -198,7 +212,13 @@ class ReportesController extends Controller
                 ->addColumn('action', function($data){
                     $msm = 'estas segur@ que desea elminar este egreso';
                     $actionBtn = '
-                    
+                    <a href="'.route("Egresos.edit",$data->Egx_Id).'" class="edit btn btn-success btn-xs"><i class="fas fa-edit"> </i></a>
+                    <a  class="edit btn  btn-xs">
+                    <form method="POST"  id="formdeleteMetodoPago'.$data->Egx_Id.'" action="'.route("Egresos.delete",$data->Egx_Id).'">
+                            <input type="hidden" name="_token" value="'. csrf_token() .'">
+                            <input name="_method" type="hidden" value="DELETE">
+                            <button type="submit"  onclick="FormDelete(\'MetodoPago'.$data->Egx_Id.'\',\''.$msm.'\',event)" class="btn btn-danger btn-xs" data-toggle="tooltip" title="Delete"><i class="fas fa-trash"> </i></button>
+                     </form></a>
                     '; 
                     return $actionBtn;
                 }) 
@@ -235,10 +255,16 @@ class ReportesController extends Controller
                 ->addColumn("monto",function($Data){
                     return "S/ ".moneyformat($Data->Igx_Monto);
                 })
-                ->addColumn('action', function($Data){
-                    $msm = "estas segur@ que desea elminar este cliente";
+                ->addColumn('action', function($data){
+                    $msm = "estas segur@ que desea elminar este ingreso";
                     $actionBtn = '
-                     
+                    <a href="'.route("Ingresos.edit",$data->Igx_Id).'" class="edit btn btn-success btn-xs"><i class="fas fa-edit"> </i></a>
+                    <a  class="edit btn  btn-xs">
+                    <form method="POST"  id="formdeleteingresos'.$data->Igx_Id.'" action="'.route("Ingresos.delete",$data->Igx_Id).'">
+                            <input type="hidden" name="_token" value="'. csrf_token() .'">
+                            <input name="_method" type="hidden" value="DELETE">
+                            <button type="submit"  onclick="FormDelete(\'ingresos'.$data->Igx_Id.'\',\''.$msm.'\',event)" class="btn btn-danger btn-xs" data-toggle="tooltip" title="Delete"><i class="fas fa-trash"> </i></button>
+                     </form></a>
                     ';
                     return $actionBtn;
                 }) 

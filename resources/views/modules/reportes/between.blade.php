@@ -151,8 +151,7 @@
                       <tr>
                         <th class="text-primary">Fecha</th>
                         <th class="text-success">Ingresos</th>
-                        <th class="text-warning">Egresos</th>
-                        <th class="text-info">Ganacia</th>
+                        <th class="text-warning">Egresos</th> 
                         <th> Ver </th>
                       </tr>
                     </thead>
@@ -187,19 +186,7 @@
                               </div>
                             </div>
                           </td>
-                          <td>
-                            <div class="row">
-                              <div class="col-12 bg-info">
-                                S/ 500.00
-                              </div>
-                              <div class="col-6 text-info">
-                                <i class="fa-solid fa-piggy-bank" style="opacity: .6;"></i> S/ 400.00
-                              </div>
-                              <div class="col-6 text-info">
-                                <i class="fa-solid fa-credit-card"></i> S/ 100.00
-                              </div>
-                            </div>
-                          </td>
+                           
                           <td  class="text-center" style="vertical-align : middle;text-align:center;">
                             <a href="{{ route("Reporte.ShowFecha",$rp["fecha"]) }}" class="btn btn-warning btn-xs"> <i class="fa fa-eye"></i> ver fecha</a>
                           </td>

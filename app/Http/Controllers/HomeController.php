@@ -33,9 +33,9 @@ class HomeController extends Controller
         $clientes = cliente::select(DB::raw("count(*) as number"))->where("active","A")->first();
 
         $IgxTotalG = ingresos::select(DB::raw('coalesce(SUM(ingresos.Igx_Monto),0) as total'))
-        ->where("actives","A")
         ->whereMonth( 'Igx_Fecha', '=', mesActual() )
-        ->whereYear( 'Igx_Fecha', '=', anoActual() )
+        ->whereYear( 'Igx_Fecha', '=', anoActual() ) 
+        ->where("actives","A")
         ->first();
             
         $IgxTarjetaG = ingresos::select(DB::raw('coalesce(SUM(Igx_Monto),0) as total'))
@@ -43,14 +43,16 @@ class HomeController extends Controller
         ->where("metodo_pago.Mpx_IsEfectivo","N")
         ->whereMonth( 'ingresos.Igx_Fecha', '=', mesActual() )
         ->whereYear( 'ingresos.Igx_Fecha', '=', anoActual() )
-        ->where("ingresos.actives","A")->first();
+        ->where("ingresos.actives","A")
+        ->first();
        
         $IgxEfectivoG = ingresos::select(DB::raw('coalesce(SUM(Igx_Monto),0) as total'))
         ->join("metodo_pago","metodo_pago.Mpx_Id","=","ingresos.Mpx_Id")
         ->where("metodo_pago.Mpx_IsEfectivo","Y")
         ->whereMonth( 'ingresos.Igx_Fecha', '=', mesActual() )
         ->whereYear( 'ingresos.Igx_Fecha', '=', anoActual() )
-        ->where("ingresos.actives","A")->first();
+        ->where("ingresos.actives","A")
+        ->first();
 
         $EgxTotalG = egresos::select(DB::raw('coalesce(SUM(Egx_Monto),0) as total'))
         ->whereMonth( 'Egx_Fecha', '=', mesActual() )
@@ -98,29 +100,43 @@ class HomeController extends Controller
         foreach ($days as $day) { 
             $isReport = 0;
 
-            $IgxTotal = ingresos::select(DB::raw('coalesce(SUM(ingresos.Igx_Monto),0) as total'))->where("Igx_Fecha",date('Y-m-d', strtotime($day)))->first();
+            $IgxTotal = ingresos::select(DB::raw('coalesce(SUM(ingresos.Igx_Monto),0) as total'))
+            ->where("Igx_Fecha",date('Y-m-d', strtotime($day)))
+            ->where("actives","A")
+            ->first();
             
             $IgxTarjeta = ingresos::select(DB::raw('coalesce(SUM(Igx_Monto),0) as total'))
             ->join("metodo_pago","metodo_pago.Mpx_Id","=","ingresos.Mpx_Id")
             ->where("metodo_pago.Mpx_IsEfectivo","N")
-            ->where("ingresos.Igx_Fecha",date('Y-m-d', strtotime($day)))->first();
+            ->where("ingresos.Igx_Fecha",date('Y-m-d', strtotime($day)))
+            ->where("actives","A")
+            ->first();
            
             $IgxEfectivo = ingresos::select(DB::raw('coalesce(SUM(Igx_Monto),0) as total'))
             ->join("metodo_pago","metodo_pago.Mpx_Id","=","ingresos.Mpx_Id")
             ->where("metodo_pago.Mpx_IsEfectivo","Y")
-            ->where("ingresos.Igx_Fecha",date('Y-m-d', strtotime($day)))->first();
+            ->where("ingresos.Igx_Fecha",date('Y-m-d', strtotime($day)))
+            ->where("ingresos.actives","A")
+            ->first();
 
-            $EgxTotal = egresos::select(DB::raw('coalesce(SUM(Egx_Monto),0) as total'))->where("Egx_Fecha",date('Y-m-d', strtotime($day)))->first();
+            $EgxTotal = egresos::select(DB::raw('coalesce(SUM(Egx_Monto),0) as total'))
+            ->where("Egx_Fecha",date('Y-m-d', strtotime($day)))
+            ->where("active","A")
+            ->first();
             
             $EgxTarjeta = egresos::select(DB::raw('coalesce(SUM(Egx_Monto),0) as total'))
             ->join("metodo_pago","metodo_pago.Mpx_Id","=","egresos.Mpx_Id")
             ->where("metodo_pago.Mpx_IsEfectivo","N")
-            ->where("egresos.Egx_Fecha",date('Y-m-d', strtotime($day)))->first();
+            ->where("egresos.Egx_Fecha",date('Y-m-d', strtotime($day)))
+            ->where("egresos.active","A")
+            ->first();
            
             $EgxEfectivo = egresos::select(DB::raw('coalesce(SUM(Egx_Monto),0) as total'))
             ->join("metodo_pago","metodo_pago.Mpx_Id","=","egresos.Mpx_Id")
             ->where("metodo_pago.Mpx_IsEfectivo","Y")
-            ->where("egresos.Egx_Fecha",date('Y-m-d', strtotime($day)))->first();
+            ->where("egresos.Egx_Fecha",date('Y-m-d', strtotime($day)))
+            ->where("egresos.active","A")
+            ->first();
             
             if($EgxTotal->total!=0){
                 $isReport++;

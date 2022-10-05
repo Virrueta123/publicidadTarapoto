@@ -23,13 +23,13 @@
           <div class="card-body">
              
                 <table id="Material"  class="table table-bordered table-striped">
-                    <thead>
+                    <thead class="text-center">
                         <tr> 
                             <th>Name</th> 
                             <th>Operaciones</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="text-center">
                     </tbody>
                 </table>
             

@@ -63,7 +63,7 @@
         <a href="{{ route("home") }}" class="nav-link">Inicio</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">calendario</a>
+        <a href="{{ route("Pendientes.index") }}" class="nav-link">calendario</a>
       </li>
     </ul>
 

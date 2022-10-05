@@ -7,7 +7,7 @@
               <i class="nav-icon fas fa-calendar-alt"></i>
               <p>
                 Trabajos Pendientes
-                <span class="badge badge-info right">2</span>
+                <span class="badge badge-info right">{{ $notificacionPendientesCount }}</span>
               </p>
             </a>
       </li>      

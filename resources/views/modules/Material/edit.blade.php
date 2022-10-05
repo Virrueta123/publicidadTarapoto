@@ -17,12 +17,13 @@
           </div>
           <!-- /.card-header -->
           <!-- form start -->
-          <form id="formMateriales" method="POST" action="{{ route("Material.store") }}">
+          <form id="formMateriales" method="POST" action="{{ route("Material.update",$Mx->Mx_Id) }}">
             @csrf
+            @method("PATCH")
             <div class="card-body">
               <div class="form-group">
                     <label for="Mx_Nombre">Nombre del material <code>*obligatorio</code></label>
-                    <input type="text" name="Mx_Nombre" class="form-control form-control-border" id="Mx_Nombre"  >
+                    <input type="text" value="{{ $Mx->Mx_Nombre }}" name="Mx_Nombre" class="form-control form-control-border" id="Mx_Nombre"  >
               </div>
               
               <div class="row">
@@ -30,14 +31,14 @@
                   <!-- text input -->
                   <div class="form-group mb-6 group-symbol">
                     <label for="Mx_Ancho">Ancho del materia <code>*obligatorio</code> <code class="text-info">medida en Metros</code></label>
-                    <input type="number" name="Mx_Ancho" class="form-control form-control-border" id="Mx_Ancho"  > 
-                    <span class="input-symbol">Cm</span> 
+                    <input type="number" value="{{ $Mx->Mx_Ancho }}" name="Mx_Ancho" class="form-control form-control-border" id="Mx_Ancho"  > 
+                    <span class="input-symbol">metros</span> 
                   </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group mb-6 group-symbol">
                         <label for="Mx_Longitud">Largo del materia <code>*obligatorio</code> <code class="text-info">medida en metros</code></label>
-                        <input type="number" name="Mx_Longitud" class="form-control form-control-border" id="Mx_Longitud"  > 
+                        <input type="number" value="{{ $Mx->Mx_Longitud }}" name="Mx_Longitud" class="form-control form-control-border" id="Mx_Longitud"  > 
                         <span class="input-symbol">metros</span> 
                       </div>
                 </div>
@@ -47,7 +48,11 @@
                     <select name="Tmxs" class="custom-select form-control-border border-width-2" id="exampleSelectBorderWidth2">
                         <option value="">Seleciona</option> 
                         @foreach ($Tmxs as $Tmx)
-                            <option value="{{ $Tmx->Tmx_Id }}">{{ $Tmx->Tmx_Nombre }}</option>
+                            @if ($Tmx->Tmx_Id == $Mx->Tmx_Id)
+                            <option  selected  value="{{ $Tmx->Tmx_Id }}">{{ $Tmx->Tmx_Nombre }}</option>
+                            @else
+                            <option  value="{{ $Tmx->Tmx_Id }}">{{ $Tmx->Tmx_Nombre }}</option>
+                            @endif 
                         @endforeach
                     </select>
               </div>

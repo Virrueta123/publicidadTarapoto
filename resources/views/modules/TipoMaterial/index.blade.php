@@ -15,7 +15,7 @@
             <h3 class="card-title">Todo los datos</h3>
 
             <div class="card-tools">
-              <a href="#" class="btn btn-tool bg-white text-info" title="Collapse">
+              <a href="{{ route("TipoMaterial.create") }}" class="btn btn-tool bg-white text-info" title="Collapse">
                 <i class="fas fa-plus text-success"> </i> <span>Agregar </span> 
               </a> 
             </div>
@@ -23,13 +23,13 @@
           <div class="card-body">
              
                 <table id="TipoMaterial"  class="table table-bordered table-striped">
-                    <thead>
+                    <thead class="text-center">
                         <tr> 
                             <th>Name</th> 
                             <th>Operaciones</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="text-center">
                     </tbody>
                 </table>
             

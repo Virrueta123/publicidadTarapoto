@@ -40,11 +40,14 @@
                         <label for="Mpx_Id">Metodo de pago  </label>
                         <select name="Mpx_Id" class="custom-select form-control-border border-width-2" >
                             @foreach ($Mpxs as $Mpx) 
-                                
-                                <option  {{$Mpx->Mpx_Id == $Egx->Mpx_Id  ? '' : 'selected'}} value="{{ $Mpx->Mpx_Id }}">{{ $Mpx->Mpx_Nombre }}</option>
-                       
+                                @if ($Mpx->Mpx_Id == $Egx->Mpx_Id)
+                                <option selected  value="{{ $Mpx->Mpx_Id }}">{{ $Mpx->Mpx_Nombre }}</option>
+                                @else
+                                <option value="{{ $Mpx->Mpx_Id }}">{{ $Mpx->Mpx_Nombre }}</option>
+                                @endif 
                             @endforeach
-                        </select>
+                          
+                        </select>   
                      </div>
                 </div>
               </div>
@@ -54,7 +57,12 @@
                     <select name="Tpx_Id" class="custom-select form-control-border border-width-2" >
                      
                         @foreach ($Texs as $Tex)
-                            <option {{$Tex->Tex_Id == $Egx->Tex_Id  ? '' : 'selected'}} value="{{ $Tex->Tex_Id }}">{{ $Tex->Tex_Alias }}</option>
+                            @if ($Tex->Tex_Id == $Egx->Tex_Id)
+                            <option  selected  value="{{ $Tex->Tex_Id }}">{{ $Tex->Tex_Alias }}</option>
+                            @else
+                            <option  value="{{ $Tex->Tex_Id }}">{{ $Tex->Tex_Alias }}</option>
+                            @endif
+                            
                         @endforeach
                     </select>
               </div> 

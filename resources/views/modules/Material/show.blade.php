@@ -84,6 +84,12 @@
                   @if ($rx->ds > 0)
                     <a href="{{ route("Rollo.show",$rx->cod) }}" class="edit btn btn-warning btn-sm"><i class="far fa-eye"> </i></a>
                   @else
+                  <a  class="edit btn  btn-xs">
+                    <form method="POST"  id="formdeleterollo{{$rx->Rox_Id }}" action="{{ route("Rollo.delete",$rx->Rox_Id) }}">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <input name="_method" type="hidden" value="DELETE">
+                            <button type="submit"  onclick="FormDelete('rollo{{ $rx->Rox_Id }}','Estas seguro',event)" class="btn btn-danger btn-xs" data-toggle="tooltip" title="Delete"><i class="fas fa-trash"> </i></button>
+                     </form></a>
                   {{-- 
                     <a href="{{ route("Rollo.show",$rx->cod) }}" class="edit btn btn-warning btn-sm"><i class="far fa-eye"> </i></a>
                     

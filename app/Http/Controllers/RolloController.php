@@ -39,7 +39,13 @@ class RolloController extends Controller
         ->where("materiales.Mx_Id",$cod)
         ->where("materiales.active","A")->first(); 
         if($showMx){ 
-            $codRollo = Rollo::latest('Rox_Cod')->first()->Rox_Cod + 1; 
+            $ultimoCod = Rollo::max("Rox_Cod");
+
+            if(is_null($ultimoCod)){
+                $codRollo = 100;
+            }else{
+                $codRollo = $ultimoCod + 1;
+            }   
             return View("modules.Rollo.add",["cod"=>$cod,"codRollo"=>$codRollo,"showMx"=>$showMx]); 
         }else{
             return View("layouts.error404",[
@@ -144,7 +150,15 @@ class RolloController extends Controller
      */
     public function destroy($id)
     {
-         
+        $Rox = Rollo::where("Rox_Id",$id)->where("active","A")->first();
+        $Rox = $Rox->update( ["active"=>"D"] );
+        if( $Rox){  
+            session()->flash('successo', 'Un rollo se elimino');
+            return redirect()->route("home");
+        }else{
+            session()->flash('erroro', 'fallo el registro, intentelo de nuevo');
+            return redirect()->route("home");
+        }
     }
 
     public function Igxs(Request $request){
