@@ -76,7 +76,7 @@ class MaterialController extends Controller
         ->where("materiales.Mx_Id",$id)
         ->where("materiales.active","A")->first(); 
         if($show){ 
-            $rollos = DB::select('CALL bd_publitara.showRollos(?) ', [$show->Mx_Id]);
+            $rollos = DB::select('CALL u236882933_publitarapoto.showRollos(?) ', [$show->Mx_Id]);
            
             return view("modules.Material.show",["cod"=>$id,"show"=>$show,"rollos"=>$rollos]); 
         }else{

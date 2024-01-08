@@ -15,7 +15,7 @@ class ConsultarRollo extends Component
         if($Rox){
             $response = "";
             if($orientacion == 0){
-                $rolloVertical = DB::select('CALL bd_publitara.consultarRollo(?,?,?,?,?) ', [$cod,$ancho,$largo,$sobranteA,$sobranteL]);
+                $rolloVertical = DB::select('CALL u236882933_publitarapoto.consultarRollo(?,?,?,?,?) ', [$cod,$ancho,$largo,$sobranteA,$sobranteL]);
                 if(count($rolloVertical) != 0){
                     foreach ($rolloVertical as $rv) {
                         $longitudtotal = $rv->total;
@@ -48,7 +48,7 @@ class ConsultarRollo extends Component
 
             }else{
                 
-                $rolloHorizontal= DB::select('CALL bd_publitara.consultarRollo(?,?,?,?,?) ', [$cod,$largo,$ancho,$sobranteL,$sobranteA]);
+                $rolloHorizontal= DB::select('CALL u236882933_publitarapoto.consultarRollo(?,?,?,?,?) ', [$cod,$largo,$ancho,$sobranteL,$sobranteA]);
                 if(count($rolloHorizontal) != 0){
                     foreach ($rolloHorizontal as $rh) {
                         $longitudtotal = $rh->total;
@@ -85,9 +85,9 @@ class ConsultarRollo extends Component
         
     }
     public function consultar($ancho,$largo,$sobranteA,$sobranteL,$tipoMaterial){
-        $rolloVertical = DB::select('CALL bd_publitara.consultarRolloVertical(?,?,?,?,?) ', [$ancho,$largo,$sobranteA,$sobranteL,$tipoMaterial]);
+        $rolloVertical = DB::select('CALL u236882933_publitarapoto.consultarRolloVertical(?,?,?,?,?) ', [$ancho,$largo,$sobranteA,$sobranteL,$tipoMaterial]);
 
-        $rolloHorizontal = DB::select('CALL bd_publitara.consultarRolloVertical(?,?,?,?,?) ', [$largo,$ancho,$sobranteL,$sobranteA,$tipoMaterial]);
+        $rolloHorizontal = DB::select('CALL u236882933_publitarapoto.consultarRolloVertical(?,?,?,?,?) ', [$largo,$ancho,$sobranteL,$sobranteA,$tipoMaterial]);
         
         $html = "";
 
