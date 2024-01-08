@@ -24,7 +24,7 @@ class egresosController extends Controller
 
     public function index()
     {
-        return View($this->ruta."index");
+        return view($this->ruta."index");
     }
 
     /**
@@ -37,7 +37,7 @@ class egresosController extends Controller
     {
         $Mpxs = metodo_pago::where("active","A")->get();
         $Texs = tipoEgreso::where("active","A")->get();
-        return View($this->ruta."add",["Texs"=>$Texs,"Mpxs"=>$Mpxs]);
+        return view($this->ruta."add",["Texs"=>$Texs,"Mpxs"=>$Mpxs]);
     }
 
     /**
@@ -83,9 +83,9 @@ class egresosController extends Controller
         $Texs = tipoEgreso::where("active","A")->get();
         $Egx = egresos::where("Egx_Id",$id)->where("active","A")->first();
         if($Egx){ 
-            return View($this->ruta."edit",["Egx"=>$Egx,"Mpxs"=>$Mpxs,"Texs"=>$Texs]); 
+            return view($this->ruta."edit",["Egx"=>$Egx,"Mpxs"=>$Mpxs,"Texs"=>$Texs]); 
         }else{
-            return View("layouts.error404",[
+            return view("layouts.error404",[
                      "title"=>"este egreso no se encontro",
                      "desc"=>"intente de nuevo"
                    ]); 

@@ -20,7 +20,7 @@ class clienteController extends Controller
     }
     public function index()
     {
-        return View($this->ruta."index");
+        return view($this->ruta."index");
     }
 
     /**
@@ -31,7 +31,7 @@ class clienteController extends Controller
      */
     public function create()
     {
-        return View($this->ruta."add");
+        return view($this->ruta."add");
     }
 
     /**
@@ -44,9 +44,9 @@ class clienteController extends Controller
     {
         $Clx = cliente::where("Clx_Id",$id)->where("active","A")->first(); 
         if($Clx){ 
-            return View($this->ruta."show",["Clx"=>$Clx]);
+            return view($this->ruta."show",["Clx"=>$Clx]);
         }else{
-            return View("layouts.error404",[
+            return view("layouts.error404",[
                      "title"=>"este cliente no se encontro",
                      "desc"=>"intente de nuevo"
                    ]); 
@@ -64,9 +64,9 @@ class clienteController extends Controller
     {
         $Clx = cliente::where("Clx_Id",$id)->where("active","A")->first();
         if($Clx){ 
-            return View($this->ruta."edit",["Clx"=>$Clx]); 
+            return view($this->ruta."edit",["Clx"=>$Clx]); 
         }else{
-            return View("layouts.error404",[
+            return view("layouts.error404",[
                      "title"=>"este cliente no se encontro",
                      "desc"=>"intente de nuevo"
                    ]); 

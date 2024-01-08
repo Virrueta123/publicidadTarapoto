@@ -21,7 +21,7 @@ class tipoEgresosController extends Controller
     }
     public function index()
     {
-        return View($this->ruta."index");
+        return view($this->ruta."index");
     }
 
     /**
@@ -32,7 +32,7 @@ class tipoEgresosController extends Controller
      */
     public function create()
     {
-        return View($this->ruta."add");
+        return view($this->ruta."add");
     }
 
     /**
@@ -79,9 +79,9 @@ class tipoEgresosController extends Controller
     {
         $Tex = tipoEgreso::where("Tex_Id",$id)->where("active","A")->first();
         if($Tex){ 
-            return View($this->ruta."edit",["Tex"=>$Tex]); 
+            return view($this->ruta."edit",["Tex"=>$Tex]); 
         }else{
-            return View("layouts.error404",[
+            return view("layouts.error404",[
                      "title"=>"este tipo de egreso no se encontro",
                      "desc"=>"intente de nuevo"
                    ]); 

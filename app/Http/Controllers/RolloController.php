@@ -24,7 +24,7 @@ class RolloController extends Controller
     }
     public function index()
     {
-        return View("modules.Lote.index");
+        return view("modules.Lote.index");
     }
     /**
      * Store a newly created resource in storage.
@@ -46,9 +46,9 @@ class RolloController extends Controller
             }else{
                 $codRollo = $ultimoCod + 1;
             }   
-            return View("modules.Rollo.add",["cod"=>$cod,"codRollo"=>$codRollo,"showMx"=>$showMx]); 
+            return view("modules.Rollo.add",["cod"=>$cod,"codRollo"=>$codRollo,"showMx"=>$showMx]); 
         }else{
-            return View("layouts.error404",[
+            return view("layouts.error404",[
                      "title"=>"este material no se encontro",
                      "desc"=>"intente de nuevo"
                    ]); 
@@ -127,7 +127,7 @@ class RolloController extends Controller
         ->where("actives","A")
         ->where("Igx_IsGastar","Y")->first(); 
     
-        return View("modules.Rollo.show",["show"=>$show,"usado"=>$usado]);
+        return view("modules.Rollo.show",["show"=>$show,"usado"=>$usado]);
     }
 
     /**

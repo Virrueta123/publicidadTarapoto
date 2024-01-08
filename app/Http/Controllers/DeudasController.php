@@ -84,9 +84,9 @@ class DeudasController extends Controller
 
         if($dex){ 
             $fechaHuman = Carbon::parse($dex->Igx_Fecha)->diffInDays(fecha_hoy());
-            return View($this->ruta."show",["dex"=>$dex,"fechaHuman"=>$fechaHuman,"Mpxs"=>$Mpxs]); 
+            return view($this->ruta."show",["dex"=>$dex,"fechaHuman"=>$fechaHuman,"Mpxs"=>$Mpxs]); 
         }else{
-            return View("layouts.error404",[
+            return view("layouts.error404",[
                      "title"=>"este deuda no se encontro",
                      "desc"=>"intente de nuevo"
                    ]); 

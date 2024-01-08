@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\TipoMaterial;
-use Facade\FlareClient\View;
+use Facade\FlareClient\view;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -23,7 +23,7 @@ class TipoMaterialController extends Controller
     
     public function index()
     {
-        return View("modules.TipoMaterial.index");
+        return view("modules.TipoMaterial.index");
     }
 
     
@@ -35,7 +35,7 @@ class TipoMaterialController extends Controller
      */
     public function create()
     {
-        return View($this->ruta."create");
+        return view($this->ruta."create");
     }
 
     /**
@@ -80,9 +80,9 @@ class TipoMaterialController extends Controller
     {
         $Tmx = TipoMaterial::where("Tmx_Id",$id)->where("active","A")->first();
         if($Tmx){ 
-            return View($this->ruta."edit",["Tmx"=>$Tmx]); 
+            return view($this->ruta."edit",["Tmx"=>$Tmx]); 
         }else{
-            return View("layouts.error404",[
+            return view("layouts.error404",[
                      "title"=>"este tipo de material no se encontro",
                      "desc"=>"intente de nuevo"
                    ]); 

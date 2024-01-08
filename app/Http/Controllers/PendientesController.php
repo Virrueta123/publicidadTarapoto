@@ -20,7 +20,7 @@ class PendientesController extends Controller
     }
     public function index()
     {
-        return View($this->ruta."index");
+        return view($this->ruta."index");
     }
 
     /**
@@ -31,7 +31,7 @@ class PendientesController extends Controller
      */
     public function create()
     {
-        return View($this->ruta."add");
+        return view($this->ruta."add");
     }
     /**
      * Store a newly created resource in storage.
@@ -84,9 +84,9 @@ class PendientesController extends Controller
             }else{
                 $cliente = "Dni =".$Clx->Clx_Dni."-".$Clx->Clx_Nombre."-".$Clx->Clx_Apellido;
             }
-            return View($this->ruta."edit",["Pex"=>$Pex,"cliente"=>$cliente,"cod"=>$Pex->Clx_Id]); 
+            return view($this->ruta."edit",["Pex"=>$Pex,"cliente"=>$cliente,"cod"=>$Pex->Clx_Id]); 
         }else{
-            return View("layouts.error404",[
+            return view("layouts.error404",[
                      "title"=>"este pendiente no se encontro",
                      "desc"=>"intente de nuevo"
                    ]); 

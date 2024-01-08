@@ -37,7 +37,7 @@ class ReportesController extends Controller
      public function ShowFecha($fecha)
     {
          
-        return View($this->ruta."showFecha",[
+        return view($this->ruta."showFecha",[
             "fecha"=> $fecha
         ]); 
     }
@@ -54,7 +54,7 @@ class ReportesController extends Controller
         $FechaF = "";
         $reporte = [];
         $isSearch = false;
-        return View($this->ruta."between",[
+        return view($this->ruta."between",[
             "FechaI"=>$FechaI,
             "FechaF"=>$FechaF,
             "reporte"=>$reporte,
@@ -187,7 +187,7 @@ class ReportesController extends Controller
             }
             
         }
-        return View($this->ruta."between",
+        return view($this->ruta."between",
         [
             "FechaI"=>$FechaI,
             "FechaF"=>$FechaF, 

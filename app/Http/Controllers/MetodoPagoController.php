@@ -21,7 +21,7 @@ class MetodoPagoController extends Controller
     }
     public function index()
     {
-        return View($this->ruta."index");
+        return view($this->ruta."index");
     }
 
     /**
@@ -32,7 +32,7 @@ class MetodoPagoController extends Controller
      */
     public function create()
     {
-        return View($this->ruta."create");
+        return view($this->ruta."create");
     }
 
     /**
@@ -78,9 +78,9 @@ class MetodoPagoController extends Controller
     {
         $Mpx = metodo_pago::where("Mpx_Id",$id)->where("active","A")->first();
         if($Mpx){ 
-            return View($this->ruta."edit",["Mpx"=>$Mpx]); 
+            return view($this->ruta."edit",["Mpx"=>$Mpx]); 
         }else{
-            return View("layouts.error404",[
+            return view("layouts.error404",[
                      "title"=>"este metodo de pago no se encontro",
                      "desc"=>"intente de nuevo"
                    ]); 
