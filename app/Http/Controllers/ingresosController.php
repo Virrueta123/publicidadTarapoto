@@ -37,7 +37,7 @@ class ingresosController extends Controller
     {      
         $metodoPago = metodo_pago::where("active","A")->get();
         $TipoMaterial = TipoMaterial::where("active","A")->get(); 
-        return View($this->ruta."add",["TipoMaterial"=>$TipoMaterial,"metodoPago"=>$metodoPago]);
+        return view($this->ruta."add",["TipoMaterial"=>$TipoMaterial,"metodoPago"=>$metodoPago]);
     }
     /**
      * Store a newly created resource in storage.
@@ -259,9 +259,9 @@ class ingresosController extends Controller
         ->where("Igx_Id",$id)->where("actives","A")
         ->first();
         if($Igx){ 
-            return View($this->ruta."edit",["Igx"=>$Igx,"Mpxs"=>$Mpxs ]); 
+            return view($this->ruta."edit",["Igx"=>$Igx,"Mpxs"=>$Mpxs ]); 
         }else{
-            return View("layouts.error404",[
+            return view("layouts.error404",[
                      "title"=>"este ingreso no se encontro",
                      "desc"=>"intente de nuevo"
                    ]); 
