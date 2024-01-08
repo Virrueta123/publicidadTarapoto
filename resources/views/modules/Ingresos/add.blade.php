@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('name')
-     Crear  Ingresos
+     Crear  ingresos
 @endsection
 
 @section('content')
