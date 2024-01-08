@@ -24,7 +24,7 @@ class MaterialController extends Controller
     }
     public function index()
     {
-        return View("modules.Material.index");
+        return view("modules.Material.index");
     }
 
     public function create(){
@@ -32,7 +32,7 @@ class MaterialController extends Controller
         $Tmxs = TipoMaterial::where("active","A")->get();
         array_push($data,["Tmxs"=>$Tmxs]);
  
-        return View("modules.Material.add",["Tmxs"=>$Tmxs]);
+        return view("modules.Material.add",["Tmxs"=>$Tmxs]);
     }
     /**
      * Store a newly created resource in storage.
@@ -78,9 +78,9 @@ class MaterialController extends Controller
         if($show){ 
             $rollos = DB::select('CALL bd_publitara.showRollos(?) ', [$show->Mx_Id]);
            
-            return View("modules.Material.show",["cod"=>$id,"show"=>$show,"rollos"=>$rollos]); 
+            return view("modules.Material.show",["cod"=>$id,"show"=>$show,"rollos"=>$rollos]); 
         }else{
-            return View("layouts.error404",[
+            return view("layouts.error404",[
                      "title"=>"este material no se encontro",
                      "desc"=>"intente de nuevo"
                    ]); 
@@ -103,9 +103,9 @@ class MaterialController extends Controller
         ->where("Mx_Id",$id)->where("materiales.active","A")
         ->first();
         if($Mx){ 
-            return View("modules.Material.edit",["Mx"=>$Mx,"Tmxs"=>$Tmxs ]); 
+            return view("modules.Material.edit",["Mx"=>$Mx,"Tmxs"=>$Tmxs ]); 
         }else{
-            return View("layouts.error404",[
+            return view("layouts.error404",[
                      "title"=>"este material no se encontro",
                      "desc"=>"intente de nuevo"
                    ]); 
