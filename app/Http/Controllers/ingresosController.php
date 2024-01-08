@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class ingresosController extends Controller
 {
-    private $ruta = "modules.Ingresos.";
+    private $ruta = "modules.ingresos.";
     /**
      * Display a listing of the resource.
      *

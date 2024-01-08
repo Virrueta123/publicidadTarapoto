@@ -83,7 +83,7 @@ Route::delete('/deuda/{id}', [App\Http\Controllers\DeudasController::class, 'des
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes Rollo
+| Web Routes ingresos
 |--------------------------------------------------------------------------  
 */   
 Route::get('/ingresos/crear', [App\Http\Controllers\ingresosController::class, 'create'])->name('Ingresos.create'); 
